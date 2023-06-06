@@ -1,0 +1,280 @@
+[
+	// --------------------------------------------------
+	// サイドバーの制御
+	// --------------------------------------------------
+	{
+		"key": "ctrl+d",
+		"command": "workbench.view.explorer",
+		"when": "!explorerViewletVisible && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+	},
+	{
+		"key": "ctrl+d",
+		"command": "workbench.action.toggleSidebarVisibility",
+		"when": "explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+	},
+	// サイドバー、エディタグループ遷移設定
+	// ctrl + t でサイドバーフォーカストグル
+	{
+		"key": "ctrl+t",
+		"command": "workbench.action.focusSideBar",
+		"when": "editorFocus"
+	},
+	{
+		"key": "ctrl+t",
+		"command": "workbench.action.focusFirstEditorGroup",
+		"when": "sideBarFocus"
+	},
+	// --------------------------------------------------
+	// グループの移動
+	// --------------------------------------------------
+	// ctrl + l (右制御) でグループ移動
+	{
+		"key": "ctrl+l",
+		"command": "workbench.action.focusRightGroup",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// ctrl + l (右制御) 一番右にいる状態でサイドバーに移動
+	{
+		"key": "ctrl+l",
+		"command": "workbench.action.focusSideBar",
+		"when": "editorFocus && vim.mode != 'Insert' && activeEditorGroupLast"
+	},
+	// ctrl + l (右制御) サイドバーにいる状態で一番左に移動
+	{
+		"key": "ctrl+l",
+		"command": "workbench.action.focusFirstEditorGroup",
+		"when": "sideBarFocus"
+	},
+	// ctrl + l (右制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	{
+		"key": "ctrl+l",
+		"command": "workbench.action.focusSideBar",
+		"when": "!sideBarFocus && !editorFocus"
+	},
+	// ctrl + h (左制御) でグループ移動
+	{
+		"key": "ctrl+h",
+		"command": "workbench.action.focusLeftGroup",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// ctrl + h (左制御) サイドバーにいる状態で一番右に移動
+	{
+		"key": "ctrl+h",
+		"command": "workbench.action.focusLastEditorGroup",
+		"when": "sideBarFocus"
+	},
+	// ctrl + h (左制御) 一番左にいる状態でサイドバー
+	{
+		"key": "ctrl+h",
+		"command": "workbench.action.focusSideBar",
+		"when": "editorFocus && vim.mode != 'Insert' && activeEditorGroupIndex == 1"
+	},
+	// ctrl + h (右制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	{
+		"key": "ctrl+h",
+		"command": "workbench.action.focusSideBar",
+		"when": "!sideBarFocus && !editorFocus"
+	},
+	// --------------------------------------------------
+	// 同一グループ内移動
+	// --------------------------------------------------
+	// ctrl + shift + h (左制御) で同一グループ内移動
+	{
+		"key": "ctrl+shift+h",
+		"command": "extension.vim_ctrl+pageup",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// ctrl + shift + l (左制御) で同一グループ内移動
+	{
+		"key": "ctrl+shift+l",
+		"command": "extension.vim_ctrl+pagedown",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// --------------------------------------------------
+	// エディタの制御
+	// --------------------------------------------------
+	{
+		"key": "ctrl+w",
+		"command": "workbench.action.closeActiveEditor",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// --------------------------------------------------
+	// エクスプローラ操作
+	// --------------------------------------------------
+	// 別ウィンドウで開く(デフォルトは「ｌ」で同一タブ開くになるので。)
+	{
+		"key": "Enter",
+		"command": "explorer.openToSide",
+		"when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder"
+	},
+	// フォルダのときは小要素をトグルで開く
+	{
+		"key": "Enter",
+		"command": "list.toggleExpand",
+		"when": "explorerViewletFocus && explorerViewletVisible && explorerResourceIsFolder"
+	},
+	{
+		"key": "l",
+		"command": "list.toggleExpand",
+		"when": "!inputFocus && explorerViewletFocus && explorerViewletVisible && explorerResourceIsFolder"
+	},
+	// --------------------------------------------------
+	// エクスプローラ操作（各種ファイル操作)
+	// ※一度のアクションではできないないので、mc→mpなどで代用。
+	// --------------------------------------------------
+	// リネーム
+	{
+		"key": "ctrl+m r",
+		"command": "renameFile",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// コピー
+	{
+		"key": "ctrl+m c",
+		"command": "filesExplorer.copy",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// ペースト
+	{
+		"key": "ctrl+m p",
+		"command": "filesExplorer.paste",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// ファイル追加
+	{
+		"key": "ctrl+m a",
+		"command": "explorer.newFile",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// 削除
+	{
+		"key": "ctrl+m d",
+		"command": "deleteFile",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// フォルダ追加
+	{
+		"key": "ctrl+m f",
+		"command": "explorer.newFolder",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// --------------------------------------------------
+	{
+		"key": "ctrl+k v",
+		"command": "markdown.showPreviewToSide",
+		"when": "editorLangId == 'markdown'"
+	},
+	{
+		"key": "ctrl+k v",
+		"command": "-markdown.showPreviewToSide",
+		"when": "editorLangId == 'markdown'"
+	},
+	{
+		"key": "ctrl+alt+[Minus]",
+		"command": "-workbench.action.quickInputBack",
+		"when": "inQuickOpen"
+	},
+	{
+		"key": "ctrl+alt+[Minus]",
+		"command": "-workbench.action.navigateBack"
+	},
+	{
+		"key": "ctrl+shift+capslock ctrl+shift+right",
+		"command": "workbench.action.focusRightGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+right",
+		"command": "-workbench.action.focusRightGroup"
+	},
+	{
+		"key": "ctrl+shift+capslock ctrl+shift+left",
+		"command": "workbench.action.focusBelowGroup"
+	},
+	{
+		"key": "ctrl+k ctrl+down",
+		"command": "-workbench.action.focusBelowGroup"
+	},
+	// ドキュメントフォーマット系
+	{
+		"key": "ctrl+shift+;",
+		"command": "editor.action.formatDocument"
+	},
+	{
+		"key": "ctrl+shift+[",
+		"command": "workbench.action.terminal.new"
+	},
+	{
+		"key": "ctrl+shift+`",
+		"command": "-workbench.action.terminal.new"
+	},
+	{
+		"key": "ctrl+[",
+		"command": "-editor.action.outdentLines",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+[",
+		"command": "-extension.vim_ctrl+[",
+		"when": "editorTextFocus && vim.active && vim.use<C-[> && !inDebugRepl"
+	},
+	{
+		"key": "ctrl+[",
+		"command": "workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active"
+	},
+	{
+		"key": "ctrl+`",
+		"command": "-workbench.action.terminal.toggleTerminal",
+		"when": "terminal.active"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "workbench.action.terminal.focusPrevious",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+pageup",
+		"command": "-workbench.action.terminal.focusPrevious",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+up",
+		"command": "-workbench.action.terminal.scrollUp",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "-workbench.action.terminal.scrollDown",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+down",
+		"command": "workbench.action.terminal.focusNext",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+pagedown",
+		"command": "-workbench.action.terminal.focusNext",
+		"when": "terminalFocus && terminalProcessSupported"
+	},
+	{
+		"key": "ctrl+shift+q",
+		"command": "workbench.action.unpinEditor",
+		"when": "activeEditorIsPinned"
+	},
+	{
+		"key": "ctrl+k shift+enter",
+		"command": "-workbench.action.unpinEditor",
+		"when": "activeEditorIsPinned"
+	},
+	{
+		"key": "ctrl+shift+q",
+		"command": "workbench.action.pinEditor",
+		"when": "!activeEditorIsPinned"
+	},
+	{
+		"key": "ctrl+k shift+enter",
+		"command": "-workbench.action.pinEditor",
+		"when": "!activeEditorIsPinned"
+	},
+]
