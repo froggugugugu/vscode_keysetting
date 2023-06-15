@@ -1,5 +1,28 @@
 [
 	// --------------------------------------------------
+	// 入力モードのときに、Ctrl + hjklでカーソル移動
+	// --------------------------------------------------
+	{
+		"key": "ctrl+h",
+		"command": "cursorLeft",
+		"when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+	},
+	{
+		"key": "ctrl+l",
+		"command": "cursorRight",
+		"when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+	},
+	{
+		"key": "ctrl+i",
+		"command": "cursorUp",
+		"when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "cursorDown",
+		"when": "editorTextFocus && vim.active && vim.mode == 'Insert'"
+	},
+	// --------------------------------------------------
 	// サイドバーの制御
 	// --------------------------------------------------
 	{
@@ -10,7 +33,7 @@
 	{
 		"key": "ctrl+d",
 		"command": "workbench.action.toggleSidebarVisibility",
-		"when": "explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+		"when": "explorerViewletVisible && !searchViewletVisible && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
 	},
 	// サイドバー、エディタグループ遷移設定
 	// ctrl + t でサイドバーフォーカストグル
@@ -27,51 +50,52 @@
 	// --------------------------------------------------
 	// グループの移動
 	// --------------------------------------------------
-	// ctrl + l (右制御) でグループ移動
+	// ctrl + shift + l (右制御) でグループ移動
 	{
-		"key": "ctrl+l",
+		"key": "ctrl+shift+l",
 		"command": "workbench.action.focusRightGroup",
 		"when": "editorFocus && vim.mode != 'Insert'"
 	},
-	// ctrl + l (右制御) 一番右にいる状態でサイドバーに移動
+	// ctrl + shift + l (右制御) サイドバーにいる状態で一番左に移動
 	{
-		"key": "ctrl+l",
-		"command": "workbench.action.focusSideBar",
-		"when": "editorFocus && vim.mode != 'Insert' && activeEditorGroupLast"
-	},
-	// ctrl + l (右制御) サイドバーにいる状態で一番左に移動
-	{
-		"key": "ctrl+l",
+		"key": "ctrl+shift+l",
 		"command": "workbench.action.focusFirstEditorGroup",
 		"when": "sideBarFocus"
 	},
-	// ctrl + l (右制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	// ctrl + shift + l (右制御) 一番右にいる状態でサイドバーに移動
 	{
-		"key": "ctrl+l",
+		"key": "ctrl+shift+l",
+		"command": "workbench.action.focusSideBar",
+		"when": "editorFocus && vim.mode != 'Insert' && activeEditorGroupLast"
+	},
+	// ctrl + shift + l (右制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	{
+		"key": "ctrl+shift+l",
 		"command": "workbench.action.focusSideBar",
 		"when": "!sideBarFocus && !editorFocus"
 	},
-	// ctrl + h (左制御) でグループ移動
+
+	// ctrl + shift + h (左制御) でグループ移動
 	{
-		"key": "ctrl+h",
+		"key": "ctrl+shift+h",
 		"command": "workbench.action.focusLeftGroup",
 		"when": "editorFocus && vim.mode != 'Insert'"
 	},
-	// ctrl + h (左制御) サイドバーにいる状態で一番右に移動
+	// ctrl + shift + h (左制御) 一番左にいる状態でサイドバー
 	{
-		"key": "ctrl+h",
-		"command": "workbench.action.focusLastEditorGroup",
-		"when": "sideBarFocus"
-	},
-	// ctrl + h (左制御) 一番左にいる状態でサイドバー
-	{
-		"key": "ctrl+h",
+		"key": "ctrl+shift+h",
 		"command": "workbench.action.focusSideBar",
 		"when": "editorFocus && vim.mode != 'Insert' && activeEditorGroupIndex == 1"
 	},
-	// ctrl + h (右制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	// ctrl + shift + h (左制御) サイドバーにいる状態で一番右に移動
 	{
-		"key": "ctrl+h",
+		"key": "ctrl+shift+h",
+		"command": "workbench.action.focusLastEditorGroup",
+		"when": "sideBarFocus && editorGroupEmpty"
+	},
+	// ctrl + shift + h (左制御) サイドバー、エディタにもフォーカスがない場合はサイドバーにフォーカス
+	{
+		"key": "ctrl+shift+h",
 		"command": "workbench.action.focusSideBar",
 		"when": "!sideBarFocus && !editorFocus"
 	},
@@ -80,14 +104,29 @@
 	// --------------------------------------------------
 	// ctrl + shift + h (左制御) で同一グループ内移動
 	{
-		"key": "ctrl+shift+h",
+		"key": "ctrl+h",
 		"command": "extension.vim_ctrl+pageup",
 		"when": "editorFocus && vim.mode != 'Insert'"
 	},
-	// ctrl + shift + l (左制御) で同一グループ内移動
+	// ctrl + shift + l (右制御) で同一グループ内移動
 	{
-		"key": "ctrl+shift+l",
+		"key": "ctrl+l",
 		"command": "extension.vim_ctrl+pagedown",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// --------------------------------------------------
+	// 左右分割
+	// --------------------------------------------------
+	// ctrl + shift + alt + h (左制御) で分割
+	{
+		"key": "ctrl+shift+alt+h",
+		"command": "workbench.action.splitEditorLeft",
+		"when": "editorFocus && vim.mode != 'Insert'"
+	},
+	// ctrl + shift + alt + l (右制御) で分割
+	{
+		"key": "ctrl+shift+alt+l",
+		"command": "workbench.action.splitEditorRight",
 		"when": "editorFocus && vim.mode != 'Insert'"
 	},
 	// --------------------------------------------------
@@ -101,6 +140,12 @@
 	// --------------------------------------------------
 	// エクスプローラ操作
 	// --------------------------------------------------
+	// ctrl + shift + h (左制御) で置換になるのをオーバーライド
+	{
+		"key": "ctrl+shift+h",
+		"command": "workbench.action.focusLastEditorGroup",
+		"when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder"
+	},
 	// 別ウィンドウで開く(デフォルトは「ｌ」で同一タブ開くになるので。)
 	{
 		"key": "Enter",
@@ -126,6 +171,12 @@
 	{
 		"key": "ctrl+m r",
 		"command": "renameFile",
+		"when": "explorerViewletVisible && filesExplorerFocus"
+	},
+	// コピー
+	{
+		"key": "ctrl+m x",
+		"command": "filesExplorer.cut",
 		"when": "explorerViewletVisible && filesExplorerFocus"
 	},
 	// コピー
@@ -276,5 +327,17 @@
 		"key": "ctrl+k shift+enter",
 		"command": "-workbench.action.pinEditor",
 		"when": "!activeEditorIsPinned"
+	},
+	{
+		"key": "ctrl+shift+w",
+		"command": "-workbench.action.closeWindow"
+	},
+	{
+		"key": "ctrl+shift+alt+e",
+		"command": "workbench.action.replaceInFiles"
+	},
+	{
+		"key": "ctrl+shift+h",
+		"command": "-workbench.action.replaceInFiles"
 	},
 ]
